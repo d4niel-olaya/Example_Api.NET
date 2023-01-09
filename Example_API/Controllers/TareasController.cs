@@ -2,12 +2,11 @@
 using Microsoft.AspNetCore.Mvc;
 using Example_API.Models;
 
-using Tarea = Example_API.Models.Tarea;
-using Newtonsoft.Json;
+using Microsoft.EntityFrameworkCore;
 
 namespace Example_API.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/tareas")]
     [ApiController]
     public class TareasController : ControllerBase
     {
@@ -20,7 +19,38 @@ namespace Example_API.Controllers
         }
 
 
-    }
+        [HttpGet("index")]
+
+        public async Task<IActionResult> GetAll()
+        {
+            return Ok(await _context.Tareas.ToListAsync());
+        }
+
+        [HttpGet("show/{id}")]
+        public async Task<IActionResult> get(int id)
+        {
+            var tarea = await _context.Tareas.FindAsync(id);  
+            return Ok(tarea);
+        }
+
+        [HttpPost("create")]
+        public async Task<IActionResult> storeTarea([FromBody] Tarea tarea)
+        {
+
+            if (!ModelState.IsValid)
+            {
+                
+                return BadRequest();
+
+            }
+            _context.Add(tarea);
+            await _context.SaveChangesAsync();
+            return StatusCode(201);
+
+        }
+
         
     }
+        
+    
 }

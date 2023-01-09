@@ -11,40 +11,16 @@ namespace Example_API.Controllers
     [ApiController]
     public class TareasController : ControllerBase
     {
-        private static readonly List<Tarea> Listado = new List<Tarea> {
-            new Tarea
-            {
-                id = 1,
-                title = "Esta es mi primera tarea",
-                description = "Esta es la desc",
-                done = '1'
+        private readonly StudyAppContext _context;
 
-            },
-            new Tarea
-            {
-                id = 2,
-                title = "Esta es la segunda tarea",
-                description = "Esta es la desc de la tercera",
-                done = '1'
-            }
-        };
-        public TareasController()
+        public TareasController(StudyAppContext context)
         {
 
+            _context = context;
         }
 
-        [HttpGet("get")]
-        public IActionResult Index()
-        {
-            string response = JsonConvert.SerializeObject(Listado);
-            return Ok(Listado);
-        }
 
-        [HttpPost("create")]
-        public ActionResult<Tarea> store(Tarea nuevaTarea) {
-            Listado.Add(nuevaTarea);
-            return StatusCode(201, "La tarea ha sido creada");
-        }
+    }
         
     }
 }

@@ -1,15 +1,13 @@
-﻿namespace Example_API.Models
+﻿using System;
+using System.Collections.Generic;
+
+namespace Example_API.Models
 {
-    public class Tarea
+    public partial class Tarea
     {
-        public int ?id { get; set; }
-
-        public string title { get; set; }   
-
-
-        public string description { get; set; }
-
-
-        public char done { get; set; }
+        public int Id { get; set; }
+        public string Title { get; set; } = null!;
+        public string Description { get; set; } = null!;
+        public bool Done { get; set; }
     }
 }

@@ -49,7 +49,19 @@ namespace Example_API.Controllers
 
         }
 
-        
+
+        [HttpDelete("deleted/{id}")]
+        public async Task<IActionResult> destroy(int id)
+        {
+            var found = await _context.Tareas.FindAsync(id);
+            if(found == null)
+            {
+                return BadRequest();
+            }
+            _context.Tareas.Remove(found);
+            await _context.SaveChangesAsync();
+            return StatusCode(202);
+        }       
     }
         
     

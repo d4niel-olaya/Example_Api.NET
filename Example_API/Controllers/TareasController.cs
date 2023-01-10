@@ -49,7 +49,24 @@ namespace Example_API.Controllers
 
         }
 
+        [HttpPut("update/{id}")]   
+        public async Task<IActionResult> update(int id,[FromBody] Tarea tarea)
+        {
+            if (id != tarea.Id)
+            {
+                return BadRequest("El id no coincide con la tarea a modificar");
+            }
+            var found = await _context.Tareas.FindAsync(id);
+            if(found != null) {
+                found.Title = tarea.Title;
+                found.Description = tarea.Description;
+                found.Done = tarea.Done;
 
+                await _context.SaveChangesAsync();
+                return NoContent();
+            }
+            return BadRequest();
+        }
         [HttpDelete("deleted/{id}")]
         public async Task<IActionResult> destroy(int id)
         {

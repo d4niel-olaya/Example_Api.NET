@@ -1,4 +1,5 @@
 ﻿using Example_API.Services;
+using Example_API.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -21,6 +22,19 @@ namespace Example_API.Controllers
         public async Task<IActionResult> Get()
         {
             return Ok(await _service.Get());
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Store(Usuario user)
+        {
+
+            var response =await _service.Save(user);
+            if (!response)
+            {
+                return BadRequest();
+            }
+            return StatusCode(201, "Se ha creado un usuario");
+
         }
 
     }

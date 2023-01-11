@@ -2,7 +2,7 @@
 
 namespace Example_API.Services
 {
-    public class TareasService
+    public class TareasService : ITareasService
     {
         private readonly StudyAppContext _services;
 

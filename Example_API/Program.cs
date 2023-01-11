@@ -1,4 +1,6 @@
 using Example_API.Models;
+using Example_API.Services;
+using Example_API;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -13,6 +15,10 @@ builder.Services.AddDbContext<StudyAppContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("StudyContext"));
 });
+
+
+builder.Services.AddScoped<IUsuarioService, UsuarioService>();
+
 
 var app = builder.Build();
 

@@ -23,7 +23,11 @@ namespace Example_API.Controllers
         {
             return Ok(await _service.Get());
         }
-
+        [HttpGet("{id}")]
+        public async Task<IActionResult> Show(int id)
+        {
+            return Ok(await _service.Show(id));
+        }
         [HttpPost]
         public async Task<IActionResult> Store(Usuario user)
         {

@@ -1,5 +1,6 @@
 ﻿using Example_API.Models;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.EntityFrameworkCore;
 
@@ -22,6 +23,11 @@ namespace Example_API.Services
             return response;
         }
 
+        public async Task<IEnumerable<Usuario>> Show(int id)
+        {
+            var found = await Get();
+            return found.Where(element => element.Id == id);
+        }
 
         public async Task<bool> Save(Usuario user)
         {
@@ -43,7 +49,7 @@ namespace Example_API.Services
     public interface IUsuarioService
     {
         Task<IEnumerable<Usuario>> Get();
-
+        Task<IEnumerable<Usuario>> Show(int id);
         Task<bool> Save(Usuario user);
     }
 }

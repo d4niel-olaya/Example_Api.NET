@@ -42,6 +42,18 @@ namespace Example_API.Services
         }
 
 
+        public async Task<bool> Destroy(int id)
+        {
+            var elemento = await _context.Usuarios.FindAsync(id);
+            if(elemento == null)
+            {
+                return false;
+            }
+            _context.Remove(elemento);
+            await _context.SaveChangesAsync();
+            return true;
+        }
+
 
     }
 
@@ -51,6 +63,8 @@ namespace Example_API.Services
         Task<IEnumerable<Usuario>> Get();
         Task<IEnumerable<Usuario>> Show(int id);
         Task<bool> Save(Usuario user);
+
+        Task<bool> Destroy(int id);
     }
 }
 

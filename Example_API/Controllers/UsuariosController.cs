@@ -41,5 +41,18 @@ namespace Example_API.Controllers
 
         }
 
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Destroy(int id)
+        {
+             var response =  await _service.Destroy(id);
+
+            if (!response)
+            {
+                return BadRequest($"El id {id} no existe");
+            }
+            return StatusCode(202, "Usuario borrado");
+        }
+
     }
 }

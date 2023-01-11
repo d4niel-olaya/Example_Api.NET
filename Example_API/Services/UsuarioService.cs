@@ -7,17 +7,17 @@ namespace Example_API.Services;
     public class UsuarioService : IUsuarioService
     {
 
-        StudyAppContext _context;
+        private readonly StudyAppContext _context;
 
         public UsuarioService(StudyAppContext context)
         {
             _context = context;
         }
 
-        public IEnumerable<Usuario> Get()
+        public async Task<IEnumerable<Usuario>> Get()
         {
 
-            var response = _context.Usuarios; 
+            var response = await _context.Usuarios.ToListAsync(); 
             return response;
         }
 
@@ -28,6 +28,6 @@ namespace Example_API.Services;
 
     public interface IUsuarioService
     {
-        IEnumerable<Usuario> Get();
+        Task<IEnumerable<Usuario>> Get();
     }
 

@@ -18,6 +18,7 @@ builder.Services.AddDbContext<StudyAppContext>(options =>
 
 
 builder.Services.AddScoped<IUsuarioService, UsuarioService>();
+builder.Services.AddScoped<IAnotacionService, AnotacionService>();
 
 
 var app = builder.Build();

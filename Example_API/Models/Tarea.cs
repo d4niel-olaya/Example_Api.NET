@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Example_API.Models;
 
 namespace Example_API.Models
 {

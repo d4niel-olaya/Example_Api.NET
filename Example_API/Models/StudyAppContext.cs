@@ -16,7 +16,7 @@ namespace Example_API.Models
         {
         }
 
-        public virtual DbSet<Anotacione> Anotaciones { get; set; } = null!;
+        public virtual DbSet<Nota> Notas { get; set; } = null!;
         public virtual DbSet<Tarea> Tareas { get; set; } = null!;
         public virtual DbSet<Usuario> Usuarios { get; set; } = null!;
 
@@ -24,18 +24,18 @@ namespace Example_API.Models
         {
             if (!optionsBuilder.IsConfigured)
             {
-// #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-                optionsBuilder.UseSqlServer("Server=LAPTOP-SJ3T7QMP\\SQLEXPRESS; Database=StudyApp; Trusted_Connection=True;");
+// warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
+                optionsBuilder.UseSqlServer("Server=localhost\\SQLEXPRESS;Database=StudyApp;Trusted_Connection=True;");
             }
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Anotacione>(entity =>
+            modelBuilder.Entity<Nota>(entity =>
             {
-                entity.HasNoKey();
+                entity.ToTable("notas");
 
-                entity.ToTable("anotaciones");
+                entity.Property(e => e.Id).HasColumnName("id");
 
                 entity.Property(e => e.Contenido)
                     .HasMaxLength(255)
@@ -47,16 +47,12 @@ namespace Example_API.Models
                     .HasColumnName("fecha")
                     .HasDefaultValueSql("(getdate())");
 
-                entity.Property(e => e.Id)
-                    .ValueGeneratedOnAdd()
-                    .HasColumnName("id");
-
-                entity.Property(e => e.IdTarea).HasColumnName("id_tarea");
+                entity.Property(e => e.IdTarea).HasColumnName("idTarea");
 
                 entity.HasOne(d => d.IdTareaNavigation)
-                    .WithMany()
+                    .WithMany(p => p.Nota)
                     .HasForeignKey(d => d.IdTarea)
-                    .HasConstraintName("FK_tareas_anotaciones");
+                    .HasConstraintName("FK_Notas_Tareas");
             });
 
             modelBuilder.Entity<Tarea>(entity =>

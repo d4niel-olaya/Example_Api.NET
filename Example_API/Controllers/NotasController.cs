@@ -39,14 +39,17 @@ namespace Example_API.Controllers
         }
 
         [HttpPost("store")]
-        public async Task<IActionResult> Store(Nota nota)
+        public async Task<IActionResult> Store([FromBody] Nota nota)
         {
             
-            var miNota = new Nota(){
-                IdTarea = nota.IdTarea,
-                Contenido = nota.Contenido
-            };
-            var result = await _context.Save(miNota);
+            // var miNota = new Nota(){
+            //     IdTarea = nota.IdTarea,
+            //     Contenido = nota.Contenido
+            // };
+            if(!ModelState.IsValid){
+                return BadRequest();
+            }
+            var result = await _context.Save(nota);
             if(result == false){
                 return StatusCode(404, "Bad request");
             }

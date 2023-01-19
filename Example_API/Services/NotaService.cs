@@ -19,7 +19,7 @@ namespace Example_API.Services
             return "Esto es un string";
         }
         public async Task<IEnumerable<Nota>> get(){
-            var response = await _service.Notas
+            var response = await _service.Notas.Include(t => t.IdTareaNavigation)
             .ToListAsync();
             return response;
         }
@@ -31,11 +31,14 @@ namespace Example_API.Services
         }
 
         public async Task<bool> Save(Nota nota)
-        {
-            if(nota.IdTarea == 0){
-                return false;
-            }
-            _service.Notas.Add(nota);
+        {  
+
+            var tarea = _service.Tareas.Include(t=>t.Nota).First();
+            var miNota = new Nota{
+                IdTarea = nota.IdTarea,
+                Contenido = nota.Contenido
+            };
+            tarea.Nota.Add(miNota);
             await _service.SaveChangesAsync();
             return true;
         }

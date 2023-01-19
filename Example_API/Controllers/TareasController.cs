@@ -23,16 +23,14 @@ namespace Example_API.Controllers
 
         public async Task<IActionResult> GetAll()
         {
-            return Ok(await _context.Tareas.ToListAsync());
+            return Ok(await _context.Tareas.Include(t => t.Nota).ToListAsync());
         }
 
         [HttpGet("show/{id}")]
-        public async Task<IActionResult> get(int id)
-        {
-            var tarea = await _context.Tareas.FindAsync(id);  
-            return Ok(tarea);
+        public async Task<IActionResult> get(int id){
+            var tarea = await _context.Tareas.Include(t => t.Nota).Where(t => t.Id == id).ToListAsync();  
+            return Ok(tarea);   
         }
-
         [HttpPost("create")]
         public async Task<IActionResult> storeTarea([FromBody] Tarea tarea)
         {

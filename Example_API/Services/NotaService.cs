@@ -33,7 +33,7 @@ namespace Example_API.Services
         public async Task<bool> Save(Nota nota)
         {  
 
-            var tarea = _service.Tareas.Include(t=>t.Nota).First();
+            var tarea = _service.Tareas.Include(t=>t.Nota).Where(t => t.Id ==nota.IdTarea).First();
             var miNota = new Nota{
                 IdTarea = nota.IdTarea,
                 Contenido = nota.Contenido

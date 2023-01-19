@@ -8,11 +8,12 @@ namespace Example_API.Models
     public partial class Nota
     {
         public int Id { get; set; }
+        [Required(ErrorMessage ="El id de la tarea es requerido")]
         public int IdTarea { get; set; }
         public string Contenido { get; set; } = null!;
         public DateTime? Fecha { get; set; }
         
         [JsonIgnore]
-        public virtual Tarea IdTareaNavigation { get; set; } = null!;
+        public virtual Tarea? IdTareaNavigation { get; set; } = null!;
     }
 }

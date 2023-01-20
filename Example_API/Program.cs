@@ -23,6 +23,11 @@ builder.Services.AddScoped<INotaService, NotaService>();
 
 var app = builder.Build();
 
+// using(var scope = app.Services.CreateScope()){
+//     var context = scope.ServiceProvider.GetRequiredService<StudyAppContext>();
+//     context.Database.Migrate();
+// }
+
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {

@@ -20,6 +20,8 @@ namespace Example_API.Models
         public virtual DbSet<Tarea> Tareas { get; set; } = null!;
         public virtual DbSet<Usuario> Usuarios { get; set; } = null!;
 
+        public virtual DbSet<Libro> Libros {get ; set ;} = null!;
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)

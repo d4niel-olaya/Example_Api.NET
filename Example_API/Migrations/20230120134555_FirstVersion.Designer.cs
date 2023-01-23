@@ -40,7 +40,6 @@ namespace Example_API.Migrations
 
                     b.ToTable("Libros");
                 });
-
             modelBuilder.Entity("Example_API.Models.Nota", b =>
                 {
                     b.Property<int>("Id")

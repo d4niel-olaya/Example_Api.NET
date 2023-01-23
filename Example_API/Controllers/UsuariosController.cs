@@ -32,7 +32,7 @@ namespace Example_API.Controllers
         public async Task<IActionResult> Store(Usuario user)
         {
 
-            var response =await _service.Save(user);
+            var response = await _service.Save(user);
             if (!response)
             {
                 return BadRequest();

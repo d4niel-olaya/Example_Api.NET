@@ -1,5 +1,6 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
+using Example_API.Models;
 
 #nullable disable
 
@@ -21,7 +22,13 @@ namespace Example_API.Migrations
                 {
                     table.PrimaryKey("PK_Libros", x => x.Id);
                 });
-
+            migrationBuilder.InsertData(
+                table:"Libros",
+                column: "Titulo",
+                values: new object[] {
+                    "Clean Arquitecture", "Clen code"
+                }
+            );
             migrationBuilder.CreateTable(
                 name: "tareas",
                 columns: table => new

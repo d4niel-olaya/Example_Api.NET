@@ -1,5 +1,6 @@
 using Example_API;
 using Example_API.Models;
+using Example_API.Response;
 using Microsoft.EntityFrameworkCore;
 
 namespace Example_API.Services
@@ -16,12 +17,15 @@ namespace Example_API.Services
 
         public string getMsg()
         {
-            return "Esto es un string";
+            return "Esto es un mensaje";
         }
         public async Task<IEnumerable<Nota>> get(){
+
             var response = await _service.Notas.Include(t => t.IdTareaNavigation)
             .ToListAsync();
             return response;
+
+
         }
 
         public async Task<IEnumerable<Nota>> getByid(int id)

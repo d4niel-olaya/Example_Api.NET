@@ -16,7 +16,6 @@ builder.Services.AddDbContext<StudyAppContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("StudyContext"));
 });
 
-
 builder.Services.AddScoped<IUsuarioService, UsuarioService>();
 builder.Services.AddScoped<INotaService, NotaService>();
 

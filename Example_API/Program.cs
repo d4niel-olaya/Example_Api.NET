@@ -1,5 +1,6 @@
 using Example_API.Models;
 using Example_API.Services;
+using Example_API.Middlewares;
 using Example_API;
 using Microsoft.EntityFrameworkCore;
 
@@ -38,7 +39,12 @@ app.UseHttpsRedirection();
 
 app.UseAuthorization();
 
+app.UseTestMiddleware();
 
 app.MapControllers();
+
+
+
+
 
 app.Run();

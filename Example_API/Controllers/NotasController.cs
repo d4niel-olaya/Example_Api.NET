@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Example_API.Models;
 using Example_API.Services;
+using Example_API.Middlewares;
 using Microsoft.EntityFrameworkCore;
 
 namespace Example_API.Controllers

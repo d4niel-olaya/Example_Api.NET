@@ -22,11 +22,14 @@ namespace Example_API.Middlewares
 
         public async Task InvokeAsync(HttpContext context){
             await _next(context);
-
+            
             if(context.Request.Path == "/Hour"){
-                await context.Response.WriteAsync(DateTime.Now.ToString());
+                var auth = context.Request.Headers.Authorization.ToString();
+                if(auth.Length == 0){
+                    await context.Response.WriteAsync(DateTime.Now.ToString());
+                }
             }
-        }
+        } 
     }
 
     public static class TestMiddlewareExtensions

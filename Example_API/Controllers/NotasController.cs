@@ -26,7 +26,7 @@ namespace Example_API.Controllers
 
         public IActionResult getMessage()
         {
-            return Ok("Esto es un mesaje");
+            return Ok(_context.getMsg());
         }
         [HttpGet("index")]
         public async Task<IActionResult> getAll(){

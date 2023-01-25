@@ -15,9 +15,11 @@ namespace Example_API.Services
         }
 
 
-        public string getMsg()
+        public IMessage getMsg()
         {
-            return "Esto es un mensaje";
+
+            IResponse<IMessage> objRes = new ResponseHTTP();
+            return objRes.GoodResponse("Ok", 200);
         }
         public async Task<IEnumerable<Nota>> get(){
 
@@ -52,7 +54,7 @@ namespace Example_API.Services
     public interface INotaService
     {
 
-        public string getMsg();
+        public IMessage getMsg();
         public Task<IEnumerable<Nota>> get();
         public Task<IEnumerable<Nota>> getByid(int id);
         public Task<bool> Save(Nota nota);

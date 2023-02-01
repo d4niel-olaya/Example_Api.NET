@@ -1,4 +1,6 @@
 ﻿using Example_API.Models;
+using Example_API.Services;
+using Microsoft.EntityFrameworkCore;
 
 namespace Example_API.Services
 {
@@ -12,18 +14,22 @@ namespace Example_API.Services
         }
 
 
-        public IEnumerable<Tarea> get()
+        public async Task<IEnumerable<Tarea>> get()
         {
-            return _services.Tareas;
+            return await _services.Tareas.ToListAsync();
         }
 
-        
+        public async Task<IEnumerable<Tarea>> getByid()
+        {
+            return await _services.Tareas.ToListAsync();
+        }
     }
 
-    public interface ITareasService
+    public interface ITareasService : IRead<Tarea>
     {
-        public IEnumerable<Tarea> get();
+
 
         
     }
+
 }

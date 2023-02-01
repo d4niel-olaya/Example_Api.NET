@@ -15,12 +15,12 @@ namespace Example_API.Services
         }
 
 
-        public IMessage getMsg()
-        {
+        // public IMessage getMsg()
+        // {
 
-            IResponse<IMessage> objRes = new ResponseHTTP();
-            return objRes.GoodResponse("Ok", 200);
-        }
+        //     IResponse<IMessage> objRes = new ResponseHTTP();
+        //     return objRes.GoodResponse("Ok", 200);
+        // }
         public async Task<IEnumerable<Nota>> get(){
 
             var response = await _service.Notas.Include(t => t.IdTareaNavigation)
@@ -54,7 +54,7 @@ namespace Example_API.Services
     public interface INotaService
     {
 
-        public IMessage getMsg();
+        // public IMessage getMsg();
         public Task<IEnumerable<Nota>> get();
         public Task<IEnumerable<Nota>> getByid(int id);
         public Task<bool> Save(Nota nota);

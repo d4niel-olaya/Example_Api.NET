@@ -4,29 +4,29 @@ namespace Example_API.Response
 
     // Resumen:
 //          Clase para responder a una solicitud hecha por el controllador.
-    public class ResponseHTTP: IResponse<IMessage>
-    {       
-        public IMessage GoodResponse(string msg, int code)
-        {
+    // public class ResponseHTTP
+    // {       
+    //     public IMessage GoodResponse(string msg, int code)
+    //     {
 
-            IMessage obj = new Message();
-            return obj;
-        }
+    //         IMessage obj = new Message();
+    //         return obj;
+    //     }
 
-        public string BadResponse(Exception error)
-        {
-            return "Esto fue una mala respueta";
-        } 
-    }
-
-    public interface IResponse<Type>
+    //     public string BadResponse(Exception error)
+    //     {
+    //         return "Esto fue una mala respuesta";
+    //     } 
+    // }
+    
+    public interface IResponse<TModel>
     {
-        public Type GoodResponse(string msg, int code);
+        public TModel GoodResponse(string msg, int code);
 
         public string BadResponse(Exception error);
     }
 
-    public class Message : IMessage
+    public class Message
     {
         public string Msg {get;set;}
 
@@ -38,12 +38,21 @@ namespace Example_API.Response
             Code = code;
         }
     }
-    public interface IMessage
+    public interface IMessage<TModel>
     {
-        public string Msg  {get; set;}
+        public TModel Msg  {get; set;}
 
         public int Code {get;set;}
     }
 
+
+    public interface BodyRes<TModel>
+    {
+        public string Msg {get; set;}
+
+        public TModel body {get;set;}
+        
+        public int Code {get; set;}
+    }
 }
 

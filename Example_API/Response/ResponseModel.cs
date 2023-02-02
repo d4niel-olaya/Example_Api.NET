@@ -46,13 +46,20 @@ namespace Example_API.Response
     }
 
 
-    public interface BodyRes<TModel>
+    public interface IBodyRes
     {
         public string Msg {get; set;}
 
-        public TModel body {get;set;}
+        public string Data {get;set;}
         
         public int Code {get; set;}
     }
+    
+    public interface IActionsResponse<TModel>
+   {
+        public TModel BadResponse();
+
+        public TModel SuccesResponse();
+   }
 }
 

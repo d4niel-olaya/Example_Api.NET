@@ -15,12 +15,18 @@ namespace Example_API.Services
         }
 
 
-        // public IMessage getMsg()
-        // {
-
-        //     IResponse<IMessage> objRes = new ResponseHTTP();
-        //     return objRes.GoodResponse("Ok", 200);
-        // }
+        public INotaBody getMsg(int id)
+        {
+            INotasResponse res = new NotasResponse();
+            try{
+                int numero = id;
+                return res.SuccesResponse();
+            }
+            catch(Exception error)
+            {
+                return res.BadResponse();
+            }
+        }
         public async Task<IEnumerable<Nota>> get(){
 
             var response = await _service.Notas.Include(t => t.IdTareaNavigation)
@@ -51,12 +57,61 @@ namespace Example_API.Services
 
     }
 
+
+    public class NotasResponse : INotasResponse
+    {
+        public int Code {get; set;}
+
+        public string Data {get;set;}
+
+        public string Msg {get; set;}
+
+        public INotaBody SuccesResponse()
+        {
+            INotaBody res = new NotaBody(){
+                Code = 200,
+                Data = "Success",
+                Msg = "mensaje"
+            };
+            return res;
+        }
+
+        public INotaBody BadResponse()
+        {
+            return new NotaBody(){
+                Code = 400,
+                Msg = "Not found",
+                Data = "null"
+            };
+        }
+
+
+    }
+
+    public class NotaBody : INotaBody
+    {
+        public int Code {get;set;}
+
+        public string Data {get; set;}
+
+        public string Msg {get; set;}
+    }
     public interface INotaService
     {
 
-        // public IMessage getMsg();
+        public INotaBody getMsg(int id);
         public Task<IEnumerable<Nota>> get();
         public Task<IEnumerable<Nota>> getByid(int id);
         public Task<bool> Save(Nota nota);
+    }
+
+    public interface INotasResponse :  INotaBody, IActionsResponse<INotaBody>
+    {
+
+    }
+
+    public interface INotaBody : IBodyRes
+    {
+
     }
 }

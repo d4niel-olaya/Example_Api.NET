@@ -22,12 +22,16 @@ namespace Example_API.Controllers
         }
 
 
-        // [HttpGet("message")]
+        [HttpGet("message/{id}")]
 
-        // public IActionResult getMessage()
-        // {
-        //     return Ok(_context.getMsg());
-        // }
+        public IActionResult getMessage(int id)
+        {
+            if(_context.getMsg(id).Code == 200)
+            {
+                return Ok(_context.getMsg(id));
+            }
+            return BadRequest();
+        }
         [HttpGet("index")]
         public async Task<IActionResult> getAll(){
             return Ok(await _context.get());

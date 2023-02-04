@@ -88,6 +88,38 @@ namespace Example_API.Services
 
     }
 
+
+    public class NotasResponseV2 : IMethods<INotasRes, INotaService>
+    {
+
+        public INotasRes SuccessResponse(INotaService body)
+        {
+            return new NotasRes(){
+                Code = 200,
+                Data = body,
+                Msg = "Ok"
+            };
+        }
+
+        public INotasRes BadResponse(INotaService body)
+        {
+            return new NotasRes(){
+                Code = 400,
+                Data = body,
+                Msg = "Bad"
+            };
+        }
+    }
+
+    public interface INotasRes : IBodyResponse<INotaService>{}
+
+    public class NotasRes : INotasRes {
+        public int Code {get; set;}
+
+        public INotaService Data {get; set;}
+
+        public string Msg {get; set;}
+    }
     public class NotaBody : INotaBody
     {
         public int Code {get;set;}

@@ -38,6 +38,23 @@ namespace Example_API.Response
             Code = code;
         }
     }
+
+
+    public interface IMethods<T, X>
+    {
+        T SuccessResponse(X body);
+
+        T BadResponse(X body);
+    }
+
+    public interface IBodyResponse<T>
+    {
+        int Code {get; set;}
+
+        T Data {get;set;}
+
+        string Msg {get; set;}
+    }
     public interface IMessage<TModel>
     {
         public TModel Msg  {get; set;}

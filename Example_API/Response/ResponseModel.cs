@@ -33,6 +33,15 @@ namespace Example_API.Response
             Message = msg;
         }
     }
+
+    public interface IDataBinding<T>
+    {
+        int Code {get; set;}
+
+        T Data {get;set;}
+
+        string Message {get; set;}
+    }
     public interface IResponse<TModel>
     {
         public TModel GoodResponse(string msg, int code);

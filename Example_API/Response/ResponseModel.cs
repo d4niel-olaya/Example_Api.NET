@@ -18,7 +18,21 @@ namespace Example_API.Response
     //         return "Esto fue una mala respuesta";
     //     } 
     // }
-    
+    public class DataBinding<T>
+    {
+        public int Code {get; set;}
+
+        public T Data {get; set;}
+
+        public string Message {get;set;}
+
+        public DataBinding(int code , T data, string msg)
+        {
+            Code = code;
+            Data = data;
+            Message = msg;
+        }
+    }
     public interface IResponse<TModel>
     {
         public TModel GoodResponse(string msg, int code);

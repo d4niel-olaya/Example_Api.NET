@@ -1,6 +1,7 @@
 using Example_API.Models;
 using Example_API.Services;
 using Example_API.Middlewares;
+using Example_API.Response;
 using Example_API;
 using Microsoft.EntityFrameworkCore;
 
@@ -19,7 +20,8 @@ builder.Services.AddDbContext<StudyAppContext>(options =>
 
 builder.Services.AddScoped<IUsuarioService, UsuarioService>();
 builder.Services.AddScoped<INotaService, NotaService>();
-
+builder.Services.AddScoped<ICustomService, CustomService>();
+builder.Services.AddScoped<IContext, CustomContext>();
 
 var app = builder.Build();
 

@@ -22,5 +22,11 @@ namespace Example_API.Controllers
         {
             return Ok(_service.getWords());
         }
+
+        [HttpGet("listado/{id}")]
+        public IActionResult getWord(int id)
+        {
+            return StatusCode(_service.getWord(id).Code,_service.getWord(id));
+        }
     }
 }

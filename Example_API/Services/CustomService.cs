@@ -16,6 +16,11 @@ namespace Example_API.Services
         {
             return new DataBinding<IEnumerable<string>>(200, _context.Words(), "Ok");
         }
+
+        public DataBinding<string> getWord(int index)
+        {
+            return new DataBinding<string>(200, _context.getWord(index), "Found");
+        } 
     }
 
 
@@ -29,6 +34,11 @@ namespace Example_API.Services
                 "Example1", "Example12"
             };
         }
+
+        public string getWord(int index)
+        {
+            return Words().ElementAt(index);
+        }
     }
 
     
@@ -37,9 +47,14 @@ namespace Example_API.Services
     public interface ICustomService
     {
         DataBinding<IEnumerable<string>> getWords();
+
+        DataBinding<string> getWord(int index);
     }
     public interface IContext
     {
         IEnumerable<string> Words();
+
+
+        string getWord(int index);
     }
 }

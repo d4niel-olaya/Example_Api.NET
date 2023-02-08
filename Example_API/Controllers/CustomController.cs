@@ -31,7 +31,7 @@ namespace Example_API.Controllers
                 return StatusCode(_service.getWord(id).Code,_service.getWord(id));
             }
             catch(Exception error)
-            {
+            { 
                 return BadRequest(_service.BadResponse(error.Message.ToString(), 400, "Bad request"));
             }
         }

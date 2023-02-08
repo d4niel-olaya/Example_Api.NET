@@ -26,7 +26,14 @@ namespace Example_API.Controllers
         [HttpGet("listado/{id}")]
         public IActionResult getWord(int id)
         {
-            return StatusCode(_service.getWord(id).Code,_service.getWord(id));
+            try{
+
+                return StatusCode(_service.getWord(id).Code,_service.getWord(id));
+            }
+            catch(Exception error)
+            {
+                return BadRequest(_service.BadResponse(error.Message.ToString(), 400, "Bad request"));
+            }
         }
     }
 }

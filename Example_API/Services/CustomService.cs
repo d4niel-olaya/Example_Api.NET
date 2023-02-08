@@ -21,6 +21,11 @@ namespace Example_API.Services
         {
             return new DataBinding<string>(200, _context.getWord(index), "Found");
         } 
+
+        public DataBinding<string> BadResponse(string msg , int code, string content)
+        {
+            return new DataBinding<string>(code,content, msg);
+        }
     }
 
 
@@ -49,6 +54,8 @@ namespace Example_API.Services
         DataBinding<IEnumerable<string>> getWords();
 
         DataBinding<string> getWord(int index);
+
+        DataBinding<string> BadResponse(string msg, int code, string content);
     }
     public interface IContext
     {

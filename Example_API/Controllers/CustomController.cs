@@ -2,6 +2,8 @@ using Example_API.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Example_API.Models;
+using System.Text;
+using System.IO;
 
 namespace Example_API.Controllers
 {
@@ -35,5 +37,17 @@ namespace Example_API.Controllers
                 return BadRequest(_service.BadResponse(error.Message.ToString(), 400, "Bad request"));
             }
         }
+
+        [HttpGet("archivo")]
+        public IActionResult getFile()
+        {
+            string[] lineas = {"Linea1", "Linea 2"};
+            string contenido = "Este es el contenido de un archivo de texto";
+            byte[] content = Encoding.UTF8.GetBytes(contenido);
+            var arr = new ByteArrayContent(content);
+            return File(content, "text/plain");
+        }
+
+        
     }
 }

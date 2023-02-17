@@ -5,6 +5,8 @@ using Example_API.Models;
 using System.Text;
 using System.IO;
 using SpreadsheetLight;
+using System.Net.Mail;
+using System.Net;
 
 
 namespace Example_API.Controllers
@@ -61,13 +63,38 @@ namespace Example_API.Controllers
                 // string ruta = @"C:\Users\Juan Daniel\Downloads\Productos-y-Servicios (11).xlsx";
                 SLDocument documento = new SLDocument(archivo.OpenReadStream());    
                 int fila = 2;
-                string valor = documento.GetCellValueAsString(fila, 2);
+                string valor = documento.GetCellValueAsString(2, 3);
                 Console.WriteLine(valor);
+                Console.WriteLine(archivo.ContentType);
             }
             return Ok("OK");
         }
         
 
-        
+        [HttpPost("Enviar-correo")]
+        public async Task<IActionResult> Email([FromForm]string asunto,[FromForm] string destinatario, [FromForm] IFormFile archivo)
+        {
+            string AdminUser = "";
+            string AdminPassword = "";
+            string SMTPName = "smtp.office365.com";
+            string port = "587";
+            var mensaje = new MailMessage();
+            mensaje.To.Add(new MailAddress(destinatario));
+            mensaje.From = new MailAddress(AdminUser);
+            mensaje.Subject = asunto;
+            mensaje.Body = "Esto es un mensaje";
+            var archivoEnviar = new Attachment(archivo.OpenReadStream(), archivo.FileName,archivo.ContentType);
+            mensaje.Attachments.Add(archivoEnviar);
+            using (var smtp = new SmtpClient())
+            {
+                var credencial = new NetworkCredential(AdminUser, AdminPassword);
+                smtp.Credentials = credencial;
+                smtp.Host = SMTPName;
+                smtp.Port = int.Parse(port);
+                smtp.EnableSsl = true;
+                await smtp.SendMailAsync(mensaje);
+            }
+            return Ok("Ok");
+        }
     }
 }

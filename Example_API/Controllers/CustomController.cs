@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Mvc;
 using Example_API.Models;
 using System.Text;
 using System.IO;
+using SpreadsheetLight;
+
 
 namespace Example_API.Controllers
 {
@@ -47,6 +49,24 @@ namespace Example_API.Controllers
             var arr = new ByteArrayContent(content);
             return File(content, "text/plain");
         }
+
+
+
+        [HttpPost("excel")]
+        public IActionResult leer([FromForm] IFormFile archivo)
+        {
+            if(archivo != null && archivo.Length > 0)
+            {
+
+                // string ruta = @"C:\Users\Juan Daniel\Downloads\Productos-y-Servicios (11).xlsx";
+                SLDocument documento = new SLDocument(archivo.OpenReadStream());    
+                int fila = 2;
+                string valor = documento.GetCellValueAsString(fila, 2);
+                Console.WriteLine(valor);
+            }
+            return Ok("OK");
+        }
+        
 
         
     }

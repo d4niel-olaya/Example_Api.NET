@@ -1,5 +1,5 @@
 using Example_API.Response;
-
+using Example_API.Respuesta;
 
 namespace Example_API.Services
 {
@@ -25,6 +25,11 @@ namespace Example_API.Services
         public DataBinding<string> BadResponse(string msg , int code, string content)
         {
             return new DataBinding<string>(code,content, msg);
+        }
+
+        public Esquema<IContext> Succes()
+        {
+            return new Esquema<IContext>(200, "ok", (IContext)_context.Words());
         }
     }
 

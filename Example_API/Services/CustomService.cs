@@ -27,9 +27,9 @@ namespace Example_API.Services
             return new DataBinding<string>(code,content, msg);
         }
 
-        public Esquema<IContext> Succes()
+        public IEsquema Succes()
         {
-            return new Esquema<IContext>(200, "ok", (IContext)_context.Words());
+            return new Esquema(200, "ok", "This is my response");
         }
     }
 
@@ -49,6 +49,8 @@ namespace Example_API.Services
         {
             return Words().ElementAt(index);
         }
+
+
     }
 
     
@@ -61,6 +63,8 @@ namespace Example_API.Services
         DataBinding<string> getWord(int index);
 
         DataBinding<string> BadResponse(string msg, int code, string content);
+
+        IEsquema Succes();
     }
     public interface IContext
     {

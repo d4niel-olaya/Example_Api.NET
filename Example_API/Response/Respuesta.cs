@@ -4,15 +4,16 @@ using System;
 namespace Example_API.Respuesta
 {
 
-    public class Esquema<T> : IEsquema<T>
+    public class Esquema : IEsquema
     {
 
         public int Code {get;set;}
 
         public string Msg {get;set;}
 
-        public T Data {get; set;}
-        public Esquema(int code, string msg, T data)
+        public object Data {get; set;}
+
+        public Esquema(int code, string msg, object data)
         {
             Code = code;
             Msg = msg;
@@ -20,13 +21,13 @@ namespace Example_API.Respuesta
         }
     }
 
-    public interface IEsquema<T>
+    public interface IEsquema
     {
         int Code {get;set;}
 
         string Msg {get;set;}
 
-        T Data {get; set;}
-    }
+        object Data {get; set;}
+    } 
     
 }

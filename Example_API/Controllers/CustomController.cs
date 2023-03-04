@@ -23,6 +23,12 @@ namespace Example_API.Controllers
             _service = service;
         }
 
+
+        [HttpGet("Word")]
+        public IActionResult MyWord()
+        {
+            return StatusCode(_service.Succes().Code, _service.Succes());
+        }
         [HttpGet("listado")]
         public IActionResult getList()
         {

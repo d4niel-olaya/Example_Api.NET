@@ -29,24 +29,12 @@ namespace Example_API.Controllers
         {
             return StatusCode(_service.Succes().Code, _service.Succes());
         }
-        [HttpGet("listado")]
-        public IActionResult getList()
-        {
-            return Ok(_service.getWords());
-        }
-
         [HttpGet("listado/{id}")]
-        public IActionResult getWord(int id)
+        public IActionResult getList(int id)
         {
-            try{
-
-                return StatusCode(_service.getWord(id).Code,_service.getWord(id));
-            }
-            catch(Exception error)
-            { 
-                return BadRequest(_service.BadResponse(error.Message.ToString(), 400, "Bad request"));
-            }
+            return StatusCode(_service.GetWordById(id).Code, _service.GetWordById(id));
         }
+
 
         [HttpGet("archivo")]
         public IActionResult getFile()

@@ -12,25 +12,26 @@ namespace Example_API.Services
             _context = context;
         }
 
-        public DataBinding<IEnumerable<string>> getWords()
+        public IEsquema BadRes()
         {
-            return new DataBinding<IEnumerable<string>>(200, _context.Words(), "Ok");
+            return new Esquema(400, "Not found", "Something went wrong");
         }
-
-        public DataBinding<string> getWord(int index)
-        {
-            return new DataBinding<string>(200, _context.getWord(index), "Found");
-        } 
-
-        public DataBinding<string> BadResponse(string msg , int code, string content)
-        {
-            return new DataBinding<string>(code,content, msg);
-        }
-
         public IEsquema Succes()
         {
             return new Esquema(200, "ok", "This is my response");
         }
+
+        public IEsquema GetWordById(int id)
+        {
+            try{
+                return new Esquema(200, "Ok", _context.getWord(id));
+            }
+            catch(Exception e) 
+            {
+                return new Esquema(404, "Not found", "Index not found");
+            }
+        }
+
     }
 
 
@@ -58,13 +59,11 @@ namespace Example_API.Services
     
     public interface ICustomService
     {
-        DataBinding<IEnumerable<string>> getWords();
-
-        DataBinding<string> getWord(int index);
-
-        DataBinding<string> BadResponse(string msg, int code, string content);
-
+        IEsquema BadRes();
         IEsquema Succes();
+
+        IEsquema GetWordById(int id);
+
     }
     public interface IContext
     {

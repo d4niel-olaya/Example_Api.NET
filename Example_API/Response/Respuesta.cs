@@ -19,6 +19,7 @@ namespace Example_API.Respuesta
             Msg = msg;
             Data = data;
         }
+
     }
 
     public interface IEsquema
@@ -28,6 +29,26 @@ namespace Example_API.Respuesta
         string Msg {get;set;}
 
         object Data {get; set;}
+
     } 
+
+    public interface ISuccess
+    {
+        object Ok(int code, string msg, object data);
+
+        object Created(int code, string msg, object data);
+
+        object NotContent(int code, string msg, object data);
+    }
+
+    public interface INotSuccess
+    {
+        object NotFound(int code, string msg, object data);
+
+        object BadRes(int code, string msg, object data);
+    }
+
+    
+
     
 }

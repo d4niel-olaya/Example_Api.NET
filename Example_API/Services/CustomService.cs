@@ -14,7 +14,7 @@ namespace Example_API.Services
 
         public IEsquema BadRes()
         {
-            return new Esquema(400, "Not found", "Something went wrong");
+            return new Esquema(404, "Bad Request", "Something went wrong");
         }
         public IEsquema Succes()
         {
@@ -28,7 +28,7 @@ namespace Example_API.Services
             }
             catch(Exception e) 
             {
-                return new Esquema(404, "Not found", "Index not found");
+                return new Esquema(404, "Not found",  e.Message.ToString());
             }
         }
 
@@ -42,7 +42,7 @@ namespace Example_API.Services
         {
             return new List<string>()
             {
-                "Example1", "Example12"
+                "Example1", "Example12", "This a word"
             };
         }
 
